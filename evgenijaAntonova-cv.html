@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Dela+Gothic+One&display=swap"
+        rel="stylesheet">
+    <title>Web-dev CV</title>
+    <style>
+        :root {
+            --main-accent: #f859a8;
+            --secondary-accent: #f6ff00;
+
+            --main-text: #b3afc0;
+            --text-bright: #e4e2e9;
+            --text-accent: #0e0d11;
+
+            --main-bg: hsl(255, 13%, 6%);
+            --inner-bg: hsl(257, 11%, 12%);
+        }
+
+        .light-theme {
+            --main-text: hsl(257, 11%, 40%);
+            --text-bright: hsl(255, 13%, 6%);
+
+            --main-bg: #f2f2f2;
+            --inner-bg: #f9f9f9;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        * {
+            outline-color: var(--main-accent);
+        }
+
+
+        body {
+            margin: 0;
+            background-color: var(--main-bg);
+            color: var(--main-text);
+            font-family: "Comfortaa", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        button {
+            border: none;
+            background: none;
+            padding: 0;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .main-grid {
+            display: grid;
+            --padding-inline: 1rem;
+            --content-max-width: 70ch;
+            --breakout-max-width: 90ch;
+
+            --breakout-width: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+
+            grid-template-columns:
+                [full-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-width)) [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(0, var(--breakout-width)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-end];
+        }
+
+        .main-grid>.content {
+            grid-column: content;
+        }
+
+        .main-grid>.breakout {
+            grid-column: breakout;
+        }
+
+        .main-grid>.full {
+            grid-column: full;
+        }
+
+        .main-grid>.break-left {
+            grid-column: break-left;
+        }
+
+        .main-grid>.break-right {
+            grid-column: break-right;
+        }
+
+        body.main-grid {
+            min-height: 100vh;
+            min-height: 100svh;
+            grid-template-rows: auto 1fr auto;
+        }
+
+        .title {
+            color: var(--main-accent);
+        }
+
+        .title,
+        .subtitle,
+        .fancy {
+            font-family: "Dela Gothic One", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .lead {
+            color: var(--text-bright);
+            font-weight: 500;
+        }
+
+        .text {
+            line-height: 1.7;
+        }
+
+        .theme-toggle {
+            display: block;
+            position: relative;
+            width: 48px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .theme-toggle::before,
+        .theme-toggle::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: no-repeat center center / 32px 32px;
+            border-radius: 50%;
+            transition: transform .3s ease-in-out;
+        }
+
+
+        .theme-toggle::before {
+            transform: translate(-100%, 50%) rotate(-45deg);
+            background-image: url('./moon-icon.svg');
+            background-color: #0e0d11;
+
+        }
+
+        .theme-toggle::after {
+            background-image: url('./sun-icon.svg');
+            background-color: #f2f2f2;
+        }
+
+        .theme-toggle.light-theme::before {
+            transform: translate(0, 0);
+        }
+
+        .theme-toggle.light-theme::after {
+            transform: translate(100%, 50%) rotate(45deg);
+        }
+
+
+        .projects {
+            display: grid;
+            grid-template-rows: repeat(2, 300px);
+            grid-auto-columns: min(50%, 400px);
+            grid-auto-flow: column dense;
+            overflow-x: scroll;
+            gap: 1rem;
+        }
+
+        .projects .card {
+            grid-row: span 1;
+            grid-column: span 2;
+            background: #f859a8;
+        }
+        .projects .card.small {
+            grid-row: span 1;
+            grid-column: span 1;
+            background: tomato;
+        }
+        .projects .card.accent {
+            grid-row: span 2;
+            grid-column: span 2;
+            background: navy;
+        }
+
+
+    </style>
+</head>
+
+<body class="main-grid">
+    <header class="header breakout">
+        <button type="button" title="переключить тему" class="theme-toggle js-theme-toggle"></button>
+        <h1 class="title main-title">
+            Web-developer
+            <strong>Евгения<br>
+                Антонова</strong>
+        </h1>
+    </header>
+    <main class="main full main-grid">
+        <section class="summary content">
+            <p class="lead">
+                Web-developer с&nbsp;опытом адаптивной, кроссбраузерной верстки страниц (в&nbsp;том числе Pixel
+                perfect).
+                Умею делать простые анимации на&nbsp;CSS и&nbsp;JS, создавать поведение на&nbsp;JS. Имею представление
+                о&nbsp;поисковой
+                оптимизации и&nbsp;оптимизации производительности. Работала над коммерческими проектами различного
+                уровня
+                сложности, а&nbsp;также над личными проектами
+            </p>
+        </section>
+        <section class="skills breakout">
+            <h2 class="section-title title">
+                Технические навыки:
+            </h2>
+            <h3 class="subtitle">
+                Основные:
+            </h3>
+            <dl>
+                <dt>
+                    HTML
+                </dt>
+                <dd>
+                    уверенное владение, семантика и доступность в том числе
+                </dd>
+
+                <dt>
+                    CSS
+                </dt>
+                <dd>
+                    уверенное владение, в т.ч. flex, grid, адаптивы, переменные
+                </dd>
+
+                <dt>
+                    JavaScript
+                </dt>
+                <dd>
+                    базаовое владение - обработка форм, работа с DOM, анимации, работа с данными
+                </dd>
+            </dl>
+            <h3 class="subtitle">
+                Дополнительные:
+            </h3>
+            <dl>
+                <dt>
+                    React
+                </dt>
+                <dd>
+                    начальный уровень, только над одним проектом работала
+                </dd>
+                <dt>
+                    Tailwind CSS
+
+                </dt>
+                <dd>
+                    среднее владение, работала только в связке с реактом в том же одном проекте
+                </dd>
+                <dt>
+                    PHP
+                </dt>
+                <dd>
+                    только базовый синтаксис, интерес
+                </dd>
+                <dt>
+                    SEO
+                </dt>
+                <dd>
+                    начальное знание, интерес
+                </dd>
+            </dl>
+            <p class="text">
+                Уделяю много внимания самостоятельному обучению и&nbsp;развитию. Ключевые точки роста вижу
+                в&nbsp;изучении
+                оптимизации страниц для лучшей производительности, SEO оптимизации, JS&nbsp;(в&nbsp;том числе анимации),
+                SVG (в
+                том числе анимации). Однако придерживаюсь мнения, что лучше всего учиться на&nbsp;конкретных проектах,
+                тогда
+                и&nbsp;быстрее изучение и&nbsp;лучше запоминается.
+            </p>
+        </section>
+        <section class="experience content">
+            <h2 class="section-title title">
+                Опыт работы
+            </h2>
+            <ol class="list experience_list">
+                <li class="experience_item">
+                    <h3 class="subtitle">
+                        <span class="dates">
+                            03.2021&nbsp;&mdash; 04.2023
+                        </span>
+                        Администатор в&nbsp;медицинском центре
+                    </h3>
+                    <p class="text">
+                        В&nbsp;обязанности входило наполнение сайта на
+                        вордпрессе контентом, где я&nbsp;и&nbsp;выучила азы верстки, стилизации и&nbsp;SEO
+                    </p>
+                </li>
+                <li class="experience_item">
+                    <h3 class="subtitle">
+                        <span class="dates">
+                            08.2023&nbsp;&mdash; 12.2023
+                        </span>
+                        Стажировка Frontend
+                        <span class="company">
+                            YaZa Kazakhstan
+                        </span>
+                    </h3>
+                    <p class="text">
+                        Разрабатывала некоторые страницы сайта компании на&nbsp;react под началом опытного senior
+                        фронтендера,
+                        с&nbsp;использованием tailwind-css, shadcn, chakra&nbsp;ui, много пришлось использовать гриды.
+                        Делала страницу контактов и&nbsp;продуктов, которые планировалось выпускать. Ссылка сейчас
+                        не&nbsp;работает, поэтому не&nbsp;прилагаю.
+                    </p>
+                </li>
+                <li class="experience_item">
+                    <h3 class="subtitle">
+                        <span class="dates">
+                            12.2023&nbsp;&mdash; настоящее время
+                        </span>
+                        контент-менеджер / разработчик лендингов
+                        <span class="company">
+                            Satty Zhuldyz, официальный оператор лотереи
+                        </span>
+                    </h3>
+                    <p class="text">
+                        В&nbsp;обязанности входит создание
+                        лендингов акций, адаптация их&nbsp;под CMS, актуализация контента, верстка баннеров
+                        и&nbsp;новостей.
+                    </p>
+                </li>
+            </ol>
+            <h3 class="subtitle">
+                Профессиональные достижения:
+            </h3>
+            <ul>
+                <li>
+                    <p class="text">
+                        Разработала и&nbsp;интегрировала на&nbsp;платформа программу по&nbsp;выдаче попапов
+                        пользователям на&nbsp;основе
+                        данных о&nbsp;дате регистрации,
+                        балансе,
+                        активности, а&nbsp;также попапов акций, которые можно настраивать по&nbsp;нескольким параметрам:
+                        выдача по
+                        дате,
+                        конкретному времени суток, дню недели и&nbsp;типу устройства.
+                    </p>
+                    <p class="text">
+                        Данный дополнительный функционал увеличивает активность пользователей и&nbsp;приносит финансовые
+                        результаты. То&nbsp;что я&nbsp;это разработала, помогло также сэкономить деньги компании
+                        на&nbsp;разработке.
+                    </p>
+                </li>
+                <li>
+                    <p class="text">
+                        Разработала и&nbsp;интегрировала программу по&nbsp;настройке таймеров на&nbsp;сайте. До того
+                        в&nbsp;каждом баннере был
+                        отдельный
+                        таймер прямо в&nbsp;коде, как и&nbsp;на&nbsp;многих лендингах и&nbsp;плашках продуктов, что
+                        тормозило загрузку и&nbsp;часто
+                        приводило к
+                        проблемам на&nbsp;старте акций, когда другие контентщики путали селекторы или уже не&nbsp;могли
+                        выдумать
+                        оригинальных
+                        под каждое отдельное упоминание того или иного продукта и&nbsp;происходило перекрещивание
+                        таймеров,
+                        в
+                        результате
+                        чего они показывали неправильное время или мигали
+                    </p>
+                    <p class="text">
+                        с&nbsp;тех пор как я&nbsp;разработала данную программу, больше нет проблем со&nbsp;стартом или
+                        перенастройкой таймеров -
+                        достаточно поменять значение в&nbsp;одном месте и&nbsp;все таймеры по&nbsp;конкретной акции
+                        по&nbsp;всему сайту обновляются
+                        также я&nbsp;сделала периодические таймеры, которые обновляются сами, например, раз
+                        в&nbsp;неделю, что снизило
+                        нагрузку на&nbsp;коллег и&nbsp;уменьшило количество ошибок
+                    </p>
+                </li>
+                <li>
+                    разработала шаблон самой популярной акции, в&nbsp;результате чего ее&nbsp;стало возможно запускать
+                    с&nbsp;новым
+                    визуальным
+                    дизайном за&nbsp;3&nbsp;- 5&nbsp;рабочих дней (раньше было 5&nbsp;- 10)
+                </li>
+                <li>
+                    внедрила оптимизацию графики на&nbsp;всех рекламных материалах с&nbsp;использованием современных
+                    форматов изображений
+                </li>
+                <li>
+                    создала и&nbsp;внедрила в&nbsp;работу единый файл стилей для баннеров, таймеров, некоторых других
+                    постоянных элементов (раньше они писались в <code>&lt;style&gt;</code> каждого отдельного
+                    баннера, что зачастую приводило к&nbsp;ошибкам и&nbsp;влияло на производительность)
+                </li>
+            </ul>
+        </section>
+        <section class="projects full">
+            <div class="card"></div>
+            <div class="card small"></div>
+            <div class="card small"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card accent"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card small"></div>
+            <div class="card small"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card accent"></div>
+        </section>  
+        <!-- <section class="projects full main-grid">
+            <h2 class="section-title breakout title">
+                Проекты:
+            </h2>
+            <p class="text content lead">
+                помимо рабочих проектов я стараюсь решать задачи на frontendmentor.io, вот некоторые интересные от самых
+                поздних до самого раннего:
+            </p>
+            <ul class="list projects_list full">
+                <li class="projects_item card">
+                    <h3 class="subtitle">
+                        Калькулятор ипотеки
+                    </h3>
+                    <p class="text projects_descr">
+                        Задача была сделать калькулятор ипотеки, но&nbsp;не&nbsp;было точно сказано как считать, так что
+                        результат несколько отличается от&nbsp;настоящих.
+                    </p>
+                    <p class="text projects_descr">
+                        Мне удалось сделать красивый калькулятор с&nbsp;валидацией полей, который запоминает последний
+                        результат при помощи session storage и&nbsp;красиво анимируется.
+                    </p>
+                    <footer class="links">
+                        <a href="https://eugeniaantonova.github.io/mortgage-repayment-calculator-main/"
+                            class="link live-site-link" target="_blank">Посмотреть страницу</a>
+                        <a href="https://github.com/EugeniaAntonova/mortgage-repayment-calculator-main.git"
+                            class="link code-link" target="_blank">Посмотреть код</a>
+                    </footer>
+                </li>
+            </ul>
+            - репозиторий с кодом
+
+            страница интернет магазина с лайтбоксом
+            задание было сделать адаптивную страницу со слайдером, формой и корзиной, где пользователь может вызвать
+            лайтбокс с изображениями товара, положить товар в корзину и удалить его
+            здесь я впервые попробовала использовать классы
+            получилось плохо, но работает! вышло два независимых слайдера в лайтбоксе и на странице, при этом я
+            усложнила себе задачу, решив не использовать сторонние библиотеки
+            https://eugeniaantonova.github.io/ecommerce-product-page-main/ - сайт
+            https://github.com/EugeniaAntonova/ecommerce-product-page-main - репозиторий
+
+            страница дашборда для учета времени в разных активностях
+            здесь я практиковалась в адаптивах и фетче данных
+            https://eugeniaantonova.github.io/time-tracking-dashboard-main/ - сайт
+            https://github.com/EugeniaAntonova/time-tracking-dashboard-main.git - репозиторий
+
+            генератор советов
+            тут я училась использовать сторонние API. Тут база советов на все случаи жизни, а приложение дает
+            возможность получить случайный совет
+            https://eugeniaantonova.github.io/advice-generator-app-main/ - сайт
+            https://github.com/EugeniaAntonova/advice-generator-app-main.git - код
+
+            калькулятор возраста
+            задача была в том, чтобы создать калькулятор, который считает точный возраст человека в годах, месяцах и
+            днях
+            тут я использовала библиотеку для валидации формы и впервые сделала анимацию значения
+            https://eugeniaantonova.github.io/age-calculator-app-main/ - страница
+            https://github.com/EugeniaAntonova/age-calculator-app-main.git - код
+
+            компонент диаграмы трат
+            давался json файл с тратами, нужно вывести столбчатую диаграму, по наведению на столбец пользователь должен
+            видеть сумму трат, самая большая трата отмечается другим цветом
+            https://eugeniaantonova.github.io/expenses-chart-component-main/ - страница
+            https://github.com/EugeniaAntonova/age-calculator-app-main.git - код
+
+            попап для подписки на рассылку
+            самая первая моя задача на ресурсе. нужно было сделать компонент окна для подписки на рассылку с валидацией
+            поля email и попапом успешной подписки с указанием почты пользователя
+            здесь мне удалось самой написать валидатор поля при помощи регулярного выражения, сделать красивую анимацию
+            кнопки и сделать это все доступным с клавиатуры
+            https://eugeniaantonova.github.io/newsletter-sign-up-with-success-message-main/ - страница
+            https://github.com/EugeniaAntonova/newsletter-sign-up-with-success-message-main.git - код
+
+            самостоятельный проект:
+            мой друг нашел задачу сделать интерактивный банер, на котором расположена полка с продуктами и
+            покупательская корзина. Продукты с полки можно перетаскивать в корзину,
+            на корзине должна появляться кнопка оплаты. Дизайн был только для мобильной версии, анимации нужно было
+            придумать и сделать самостоятельно. Часть анимаций я написала на css,
+            часть на JS. Получилось реализовать не все, но большую часть - проблема только в том, что на мобильных
+            устройствах с малой высотой или при альбомной ориентации комонент работает
+            плохо, но я не стала делать манифест, lock еще мало где работает, а lockOrientation() уже deprecated
+            здесь я использовала классы, на основе более простого ДНД компонента, который посмотрела на канале
+            Александра Ламкова
+            Этот проект меня многому научил в плане классов, контекста, анимаций, промисов и событий указателя на
+            тач-устройствах
+            https://eugeniaantonova.github.io/dnd-test/ - страница
+            https://github.com/EugeniaAntonova/dnd-test.git - код
+
+            рабочие проекты
+
+            проект с попапами
+            https://github.com/EugeniaAntonova/popups-lifetime-config.git
+            тут много чего привязано именно к текущему проекту, но можно причесать и использовать где-то еще
+
+            проект с таймерами
+            тоже очень привязан к текущему проекту, но легко адаптируется под другие
+            уже использовала в своем отдельном проекте
+            https://github.com/EugeniaAntonova/timers.git
+
+            лендинг для новогодней акции
+            https://github.com/EugeniaAntonova/marafon.git
+
+            здесь мне удалось добиться очень хороших показателей в лайтхаусе: 91% производительности, 100% доступности и
+            лучших практик, 90% seo и очень удачно использовать переменные для
+            сокращения количества медиа запросов. В скрипте я постаралась использовать классы для улучшения
+            читабельности кода и его поддержки, не знаю на сколько хорошо получилось
+
+        </section> -->
+    </main>
+    <footer class="footer breakout">
+        the theme is taken from https://draculatheme.com/, which I adore and use wherever possible
+    </footer>
+    <script>
+        class ThemeToggler {
+            constructor() {
+                this.toggle = document.querySelector(`.${this.classes.toggle}`);
+                this.init();
+            }
+
+            state = {
+                lightTheme: false
+            }
+
+            classes = {
+                toggle: 'js-theme-toggle',
+                light: 'light-theme'
+            }
+
+            toggleTheme(evt) {
+                this.toggle.classList.toggle(this.classes.light);
+                document.documentElement.classList.toggle(this.classes.light);
+
+                this.state.lightTheme = !this.state.lightTheme;
+
+                localStorage.setItem('lightTheme', this.state.lightTheme);
+            }
+
+            init() {
+                this.toggle.addEventListener('click', (evt) => this.toggleTheme(evt));
+
+                let preferredThemeLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+                let prevChosenTheme = localStorage.getItem('lightTheme') == 'true';
+
+                prevChosenTheme !== null ? this.state.lightTheme = prevChosenTheme : this.state.lightTheme = this.preferredThemeLight;
+
+                if (this.state.lightTheme == true) {
+                    document.documentElement.classList.add(this.classes.light);
+                    this.toggle.classList.add(this.classes.light);
+                };
+            }
+        }
+
+        new ThemeToggler();
+    </script>
+</body>
+
+</html>
